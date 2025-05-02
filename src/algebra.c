@@ -12,25 +12,71 @@ Matrix create_matrix(int row, int col)
 
 Matrix add_matrix(Matrix a, Matrix b)
 {
-    // ToDo
-    return create_matrix(0, 0);
+    if(a.rows==b.rows&&a.cols==b.cols){
+    int i,j;
+    Matrix c=create_matrix(a.rows,a.cols);
+    for(i=0;i<a.rows;i++){
+        for(j=0;j<a.cols;j++){
+            c.data[i][j]=a.data[i][j]+b.data[i][j];
+        }
+    }
+    return c;
+    }
+    else{
+        printf("Error: Matrix a and b must have the same rows and cols.\n");
+    return create_matrix(0, 0);}
 }
 
 Matrix sub_matrix(Matrix a, Matrix b)
 {
-    // ToDo
-    return create_matrix(0, 0);
+    if(a.rows==b.rows&&a.cols==b.cols){
+        int i,j;
+        Matrix c=create_matrix(a.rows,a.cols);
+        for(i=0;i<a.rows;i++){
+            for(j=0;j<a.cols;j++){
+                c.data[i][j]=a.data[i][j]-b.data[i][j];
+            }
+        }
+        return c;
+        }
+        else{
+            printf("Error: Matrix a and b must have the same rows and cols.\n");
+            return create_matrix(0, 0);}
 }
 
 Matrix mul_matrix(Matrix a, Matrix b)
 {
-    // ToDo
-    return create_matrix(0, 0);
+    if(a.cols==b.rows){
+        int i,j,k;
+        Matrix c=create_matrix(a.rows,b.cols);
+        for(i=0;i<a.rows;i++){
+            for(j=0;j<b.cols;j++){
+                c.data[i][j] = 0;
+                for(k=0;k<a.cols;k++){
+                    c.data[i][j]+=a.data[i][k]*b.data[k][j];
+                }
+            }
+        }
+        return c;
+    }
+    else{
+        printf("Error: The number of cols of matrix a must be equal to the number of rows of matrix b.\n");
+        return create_matrix(0, 0);}
 }
 
 Matrix scale_matrix(Matrix a, double k)
 {
-    // ToDo
+    if(a.cols!=0&&a.rows!=0){
+    int i,j;
+    Matrix c=create_matrix(a.rows,a.cols);
+    for(i=0;i<a.rows;i++){
+        for(j=0;j<a.cols;j++){
+            c.data[i][j]=a.data[i][j]*k;
+        }
+    }
+    return c;
+}
+    else
     return create_matrix(0, 0);
 }
 
