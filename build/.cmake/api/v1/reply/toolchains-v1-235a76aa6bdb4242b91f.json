@@ -76,7 +76,7 @@
 					"linkFrameworkDirectories" : [],
 					"linkLibraries" : 
 					[
-						"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/libstdc++.a",
+						"C:/PROGRA~2/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/libstdc++.a",
 						"mingw32",
 						"gcc",
 						"moldname",
@@ -92,7 +92,7 @@
 						"mingwex"
 					]
 				},
-				"path" : "C:/Program Files (x86)/Dev-Cpp/MinGW64/bin/c++.exe",
+				"path" : "C:/Program Files (x86)/Dev-Cpp/MinGW64/bin/g++.exe",
 				"version" : "4.9.2"
 			},
 			"language" : "CXX",
