@@ -92,17 +92,27 @@ Matrix transpose_matrix(Matrix a)
         }
         return c;
     }
-    else
-    return create_matrix(0, 0);
+    else{
+    return create_matrix(0, 0);}
 }
 
 double det_matrix(Matrix a)
 {
     if(a.rows==a.cols){
+        double result=0;
         if(a.rows==1){
             return a.data[0][0];}
-//TODO
-        
+        if(a.rows==2){
+            result=a.data[0][0]*a.data[1][1]-a.data[1][0]*a.data[0][1];
+            return result;
+        }
+        else{
+            for(int i=0;i<a.cols;i++){
+                result+=(i % 2 == 0 ? 1 : -1)*a.data[0][i]*det_matrix(minor_matrix(a,0,i));
+            }
+            return result;
+        }
+      
     }
     else{
         printf("Error: The matrix must be a square matrix.\n");
@@ -111,13 +121,47 @@ double det_matrix(Matrix a)
 
 Matrix inv_matrix(Matrix a)
 {
-    // ToDo
-    return create_matrix(0, 0);
+    if(a.rows==a.cols){
+        if(det_matrix(a)!=0){
+            Matrix c=create_matrix(a.rows,a.cols);
+            int i,j;
+            double d=det_matrix(a);
+            for(i=0;i<a.rows;i++){
+                for(j=0;j<a.cols;j++){
+                    c.data[i][j]=1/d*((i+j) % 2 == 0 ? 1 : -1)*det_matrix(minor_matrix(a,j,i));
+                }
+            }
+            return c;
+        }
+        else{
+            printf("Error: The matrix is singular.\n");
+            return create_matrix(0, 0);
+        }
+    }
+    else{
+        printf("Error: The matrix must be a square matrix.\n");
+        return create_matrix(0, 0);}
 }
 
 int rank_matrix(Matrix a)
 {
-    // ToDo
+    int max_rank = (a.rows < a.cols) ? a.rows : a.cols;
+
+    for (int r = max_rank; r >= 1; r--) {
+        for (int i = 0; i <= a.rows - r; i++) {
+            for (int j = 0; j <= a.cols - r; j++) {
+                Matrix sub = create_matrix(r, r);
+                for (int x = 0; x < r; x++) {
+                    for (int y = 0; y < r; y++) {
+                        sub.data[x][y] = a.data[i + x][j + y];
+                    }
+                }
+                if (fabs(det_matrix(sub)) > 1e-8) {
+                    return r;
+                }
+            }
+        }
+    }
     return 0;
 }
 
@@ -134,6 +178,22 @@ double trace_matrix(Matrix a)
     else{
         printf("Error: The matrix must be a square matrix.\n");
         return 0;}
+}
+
+Matrix minor_matrix(Matrix a,int x,int y){
+    Matrix c=create_matrix(a.rows-1,a.cols-1);
+    int i,j,r=0,s=0;
+    for(i=0;i<a.rows;i++){
+        if(i==x){continue;}
+        s=0;
+        for(j=0;j<a.cols;j++){
+            if(j==y){continue;}
+            c.data[r][s]=a.data[i][j];
+            s++;
+        }
+        r++;
+    }
+    return c;
 }
 
 void print_matrix(Matrix a)

@@ -85,6 +85,15 @@ int rank_matrix(Matrix a);
 double trace_matrix(Matrix a);
 
 /**
+ * @brief 余子式
+ * @param a 矩阵a
+ * @param x 第x行
+ * @param y 第y列
+ * @return a第x+1行，y+1列的余子式
+*/
+Matrix minor_matrix(Matrix a,int x,int y);
+
+/**
  * @brief 打印矩阵，格式为：按行打印，每个元素占8个字符的宽度，小数点后保留2位，左对齐
  * @param a 矩阵a
 */
