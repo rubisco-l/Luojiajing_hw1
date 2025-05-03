@@ -82,14 +82,31 @@ Matrix scale_matrix(Matrix a, double k)
 
 Matrix transpose_matrix(Matrix a)
 {
-    // ToDo
+    if(a.cols!=0&&a.rows!=0){
+        Matrix c=create_matrix(a.cols,a.rows);
+        int i,j;
+        for(i=0;i<a.rows;i++){
+            for(j=0;j<a.cols;j++){
+                c.data[j][i]=a.data[i][j];
+            }
+        }
+        return c;
+    }
+    else
     return create_matrix(0, 0);
 }
 
 double det_matrix(Matrix a)
 {
-    // ToDo
-    return 0;
+    if(a.rows==a.cols){
+        if(a.rows==1){
+            return a.data[0][0];}
+//TODO
+        
+    }
+    else{
+        printf("Error: The matrix must be a square matrix.\n");
+        return 0;}
 }
 
 Matrix inv_matrix(Matrix a)
@@ -106,8 +123,17 @@ int rank_matrix(Matrix a)
 
 double trace_matrix(Matrix a)
 {
-    // ToDo
-    return 0;
+    if(a.rows==a.cols){
+        double result=0;
+        int i;
+        for(i=0;i<a.rows;i++){
+            result+=a.data[i][i];
+        }
+        return result;
+    }
+    else{
+        printf("Error: The matrix must be a square matrix.\n");
+        return 0;}
 }
 
 void print_matrix(Matrix a)
