@@ -237,4 +237,3 @@ r
 
 rank = 2 <img src="attachments/Pasted%20image%2020250503212457.png" width="400" />
 
----
